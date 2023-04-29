@@ -1,0 +1,442 @@
+[
+  {
+    "name": "__udmy_1_a12z_c24t",
+    "value": "VGhlIGFuc3dlciB0byBsaWZlLCB0aGUgdW5pdmVyc2UsIGFuZCBldmVyeXRoaW5nIGlzIDQy",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1714242644,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "__cfruid",
+    "value": "319d85761b60675f439718de0770f769cdf8d5f8-1682706645",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true
+  },
+  {
+    "name": "__cf_bm",
+    "value": "tr76cli8ZEuLRXQCm2RJgGCc7PzTU0gp9KOYR.G6zw8-1682706645-0-AXZ9LcSW+Nxt9xiViAmHSzVXoVe/ZJ3itlQEPUDXDKGzR2CpGgor7Uk5YD5U+TQTVgmMCktdLqoWoRCWnTiROAmpH2nH0bJiygbCZYUpF1PBUSUSgQL1cyha2ER6Vd59sgJIl7niFnRJC0jm2XR4Dfw=",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1682708445,
+    "httpOnly": true,
+    "secure": true
+  },
+  {
+    "name": "ud_firstvisit",
+    "value": "2023-04-28T18:30:46.543304+00:00:1psSrm:Bi7vHApNW14ohonAhaFH41HL3Dw",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1714242646,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_gat",
+    "value": "1",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1682706707,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_gcl_au",
+    "value": "1.1.606688268.1682706649",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1690482648,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "FPAU",
+    "value": "1.1.606688268.1682706649",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1690482648,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "__ssid",
+    "value": "73e83455db3b9a61076e384fbbbe8cd",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1808937053,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ud_user_jwt",
+    "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTc0NzQ1NTAyLCJlbWFpbCI6ImFub3VzaGthLmtoYW5uYUBmaXNjaGVyam9yZGFuLmNvbSIsImlzX3N1cGVydXNlciI6ZmFsc2UsImdyb3VwX2lkcyI6W119.ljeJzhCPkjdnWvmmTHtUvGipeNW6PQ4mZbgvCtVgIow",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1685298657,
+    "httpOnly": true,
+    "secure": true
+  },
+  {
+    "name": "ud_credit_unseen",
+    "value": "0",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682713857,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ud_credit_last_seen",
+    "value": "None",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1714242657,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "__udmy_4_a12z",
+    "value": "6d1d857cfb2cb52b3425c4d6561d29d9c8e39f2f67f00dcae272589519a85233",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1682793057,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_locale",
+    "value": "en_US",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1714242657,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "client_id",
+    "value": "bd2565cb7b0c313f5e9bae44961e8db2",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1685298657,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "access_token",
+    "value": "3BBdbwGh91TKRO0jv17jn1af1IxIYu52DKjBglgV",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1685298657,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ud_last_auth_information",
+    "value": "\"{\\\"backend\\\": \\\"udemy-auth\\\"\\054 \\\"suggested_user_email\\\": \\\"anoushka.khanna@fischerjordan.com\\\"\\054 \\\"suggested_user_name\\\": \\\"Anoushkakhanna\\\"\\054 \\\"suggested_user_avatar\\\": \\\"https://img-c.udemycdn.com/user/50x50/anonymous_3.png\\\"}:1psSry:vTe_AEtuIzygHnpBPLomlhEWCdM\"",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1729794657,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "dj_session_id",
+    "value": "ftlztht2a4lwovjvb6t3373nt2ehmrxi",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1685298657,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_pxhd",
+    "value": "0aVURVF8YdQEyrLGcG0YpttDaOtHVcY2lbmUBQFb267WM7ypPQJTvnTcSxCoCRHsZSqAXwk3nyk4joaYsWnVbw==:2yp2K-d4iY1/V0yduXtTGZU3SgSHMf0pWFIeqVBQ85n4uTBDa8n7NuSuei/CjLnDiocN/IxC1GLYmW9kGSxiVhxNoqq9UOVMRHLxOatarxI=",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "csrftoken",
+    "value": "XpTp8ulTH8ykL2DLCoWv0gbJw8d0yRhjLwcdpMyLgHd9UPG5Pj0sQJ7uOSv6uALJ",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1714156259,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "OptanonConsent",
+    "value": "isGpcEnabled=0&datestamp=Sat+Apr+29+2023+00%3A00%3A59+GMT%2B0530+(India+Standard+Time)&version=202211.2.0&isIABGlobal=false&hosts=&consentId=a0639f2e-86ed-4cc9-a1a3-7aeabc4efea4&interactionCount=1&landingPath=NotLandingPage&groups=C0003%3A1%2CC0005%3A1%2CC0004%3A1%2CC0001%3A1%2CC0002%3A1&AwaitingReconsent=false",
+    "domain": ".www.udemy.com",
+    "path": "/",
+    "expires": 1714242659,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gid",
+    "value": "GA1.2.888141354.1682706647",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1682793060,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "eventing_session_id",
+    "value": "T5KB0B7jSEGLrCiDAajAgg-1682708462120",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1682708462,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "blisspoint_fpc",
+    "value": "3c693876-afd1-4daa-8ba2-a1a847933db0",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1683311462,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_rdt_uuid",
+    "value": "1682706657148.42533613-3e68-43d0-92f8-cc1d130178af",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1690482662,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Strict"
+  },
+  {
+    "name": "_ga_7YMFEFLR6Q",
+    "value": "GS1.1.1682706649.1.1.1682706662.47.0.0",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1745778662,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.1.2073033855.1682706647",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1745778662,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "__udmy_2_v57r",
+    "value": "6ff72f54aa1d41e4b4eb05299da696ed",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1714242663,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_brand",
+    "value": "INen_US",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_campaign_code",
+    "value": "OT41123B",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_marketplace_country",
+    "value": "IN",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_price_country",
+    "value": "IN",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_release",
+    "value": "c1cb4bd6bc7042ae6dec",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_user",
+    "value": "174745502",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_version",
+    "value": "1",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_language",
+    "value": "en",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_device",
+    "value": "None",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "ud_cache_logged_in",
+    "value": "1",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682793063,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "seen",
+    "value": "1",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682708463,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ab.storage.sessionId.5cefca91-d218-4b04-8bdd-c8876ec1908d",
+    "value": "%7B%22g%22%3A%22e95137ab-321a-5f51-b2ac-28e83b041f2f%22%2C%22e%22%3A1682708463143%2C%22c%22%3A1682706663143%2C%22l%22%3A1682706663143%7D",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1714263603,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ab.storage.deviceId.5cefca91-d218-4b04-8bdd-c8876ec1908d",
+    "value": "%7B%22g%22%3A%2291904cf1-4cdb-ebdf-3306-201bd5fac858%22%2C%22c%22%3A1682706648565%2C%22l%22%3A1682706663143%7D",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1714263603,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ab.storage.userId.5cefca91-d218-4b04-8bdd-c8876ec1908d",
+    "value": "%7B%22g%22%3A%22174745502%22%2C%22c%22%3A1682706663142%2C%22l%22%3A1682706663144%7D",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1714263603,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "evi",
+    "value": "\"3@xq42f4mjbufMRs1KOIzfEjJISTvotH62hg6Ua6G1u36TPJt33rCGBDEl\"",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1685298663,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ud_rule_vars",
+    "value": "\"eJx9jcEOgyAQBX_FcG1tFgRUvsWErLBY0qakiF6M_16TtklPvb68mdlYwTxRIW_XOMeSstEhtCIoici95CRHSSMo0fceda_JG5fSLRIzFdsGFmKey5u1HgsNxz4wAaKpQdaiq3hnGjCyueiu7VR_AjAAAzsfrzseaEmLu9qSMYTo7JyW7MiumCOO948t5Qkf0f1AmZ4LzX-K3MBR5Fxx_i3ubH8BLl9Idw==:1psSs3:h23iGnxkh0EQds1NB_c4fPhHfg8\"",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1745778663,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ki_t",
+    "value": "1682706663506%3B1682706663506%3B1682706663506%3B1%3B1",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1840473063,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ki_r",
+    "value": "",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1840473063,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_fbp",
+    "value": "fb.1.1682706655192.871929228",
+    "domain": ".udemy.com",
+    "path": "/",
+    "expires": 1690482664,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "ki_s",
+    "value": "227428%3A0.0.0.0.0",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1840473064,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_dd_s",
+    "value": "rum=0&expire=1682707566363",
+    "domain": "www.udemy.com",
+    "path": "/",
+    "expires": 1682707566,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Strict"
+  }
+]
