@@ -1,0 +1,21 @@
+{
+    "reminder_days_advance": 2,
+    "start_email_days_before": 0,
+    "alert_after_deadline_days": 1,
+    "course_complete_percentage": 0.9,
+    "course_reminder_percentage": 0.5,
+    "code_admin_emails": [
+        "noah.provenzano@fischerjordan.com",
+        "muskan.laul@fischerjordan.com"
+    ],
+    "tracker_sheet_name": "Online Training Course Repository",
+    "tracker_worksheet_name": "Tracker",
+    "mc_questions_sheet_name": "Online Training Course Repository",
+    "mc_questions_worksheet_name": "Quiz Question-MCQ",
+    "admin_emails": [
+        "darshana.shetty@fischerjordan.com",
+        "anoushka.khanna@fischerjordan.com"
+    ],
+    "main_admin_email": "darshana.shetty@fischerjordan.com",
+    "windows": true
+}

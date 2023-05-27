@@ -1,0 +1,12 @@
+.tmp.driveupload/
+**/*.log
+
+**/.venv/
+**/venv/
+**/__pycache__/
+**/.vscode/
+
+bin/*
+
+config/test_*
+cookies/

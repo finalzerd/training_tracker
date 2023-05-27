@@ -1,0 +1,41 @@
+from dataclasses import dataclass
+import json
+from typing import List
+
+
+@dataclass
+class TrainingConfig:
+    REMINDER_DAYS_ADVANCE: int
+    START_EMAIL_DAYS_BEFORE: int
+    ALERT_AFTER_DEADLINE_DAYS: int
+    COURSE_COMPLETE_PERCENTAGE: float
+    COURSE_REMINDER_PERCENTAGE: float
+    CODE_ADMIN_EMAILS: List[str]
+    TRACKER_SHEET_NAME: str
+    TRACKER_WORKSHEET_NAME: str
+    MC_QUESTIONS_SHEET_NAME: str
+    MC_QUESTIONS_WORKSHEET_NAME: str
+    ADMIN_EMAILS: List[str]
+    MAIN_ADMIN_EMAIL: str
+    WINDOWS: bool
+    
+def get_config(config_json_path: str) -> TrainingConfig:
+    CONFIG = TrainingConfig(0, 0, 0, 0.0, 0.0, [], "", "", "", "", [], "", True)
+    with open(config_json_path, 'r') as f:
+        config = json.load(f)
+        CONFIG.REMINDER_DAYS_ADVANCE = config["reminder_days_advance"]
+        CONFIG.START_EMAIL_DAYS_BEFORE = config["start_email_days_before"]
+        CONFIG.ALERT_AFTER_DEADLINE_DAYS = config["alert_after_deadline_days"]
+        CONFIG.COURSE_COMPLETE_PERCENTAGE = config["course_complete_percentage"]
+        CONFIG.COURSE_REMINDER_PERCENTAGE = config["course_reminder_percentage"]
+        CONFIG.CODE_ADMIN_EMAILS = config["code_admin_emails"]
+        CONFIG.TRACKER_SHEET_NAME = config["tracker_sheet_name"]
+        CONFIG.TRACKER_WORKSHEET_NAME = config["tracker_sheet_tab_name"]
+        CONFIG.MC_QUESTIONS_SHEET_NAME = config["mc_questions_sheet_name"]
+        CONFIG.MC_QUESTIONS_WORKSHEET_NAME = config["mc_questions_sheet_tab_name"]
+        CONFIG.ADMIN_EMAILS = config["admin_emails"]
+        CONFIG.MAIN_ADMIN_EMAIL = config["main_admin_email"]
+        CONFIG.WINDOWS = config["windows"]
+    return CONFIG
+
+CONFIG = get_config("config/config.json")
