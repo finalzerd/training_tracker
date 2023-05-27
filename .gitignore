@@ -10,3 +10,5 @@ bin/*
 
 config/test_*
 cookies/
+
+fjutils/
