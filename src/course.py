@@ -38,7 +38,7 @@ class Course:
     only_quiz: bool
     only_feed: bool
     final_state: str
-    quiz_date: date
+    quiz_date: date | None
     quiz_result: float | None
 
     def is_complete(self, min_completion: float = 0.9) -> bool:

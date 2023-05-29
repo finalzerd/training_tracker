@@ -17,5 +17,20 @@
         "anoushka.khanna@fischerjordan.com"
     ],
     "main_admin_email": "darshana.shetty@fischerjordan.com",
-    "windows": true
+    "windows": true,
+    "test": false,
+    "section_names_not_to_count": [
+        "Section 22: APPENDIX: OLDER PYTHON 2 MATERIAL",
+        "Section 23: BONUS SECTION: THANK YOU!",
+        "Section 21: Bonus Material - Introduction to GUIs",
+        "Section 1: Course Overview",
+        "Section 1: Introduction",
+        "Section 1: Welcome to the Complete Microsoft PowerPoint Course",
+        "Section 1: Welcome",
+        "Section 7: BONUS Section: Database Design",
+        "Section 42: Course Wrap Up",
+        "Section 1: Microsoft Excel 101 Course Introduction",
+        "Section 7: Added Material: Putting it all together in a real life example",
+        "Section 8: Appendix: Stochastic & Markov Processes for Jarrow Model"
+    ]
 }

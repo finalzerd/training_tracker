@@ -4,11 +4,12 @@
 **/.venv/
 **/venv/
 **/__pycache__/
-**/.vscode/
 
 bin/*
 
-config/test_*
 cookies/
 
 fjutils/
+
+src/playground.py
+config/test_*.json

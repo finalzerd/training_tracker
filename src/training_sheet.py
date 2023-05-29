@@ -26,6 +26,11 @@ def get_courses(sheet: GoogleSheet) -> List[Course]:
             quiz_result = float(row['quiz results'])
         except:
             quiz_result = None
+            
+        try:
+            quiz_date = datetime.strptime(row['Quiz sent date'], "%m/%d/%y")
+        except:
+            quiz_date = None
 
         courses.append(Course(row_number=i+2,
                               name=row['Course'],
@@ -33,9 +38,9 @@ def get_courses(sheet: GoogleSheet) -> List[Course]:
                               login=row['email'],
                               password=row['password'],
                               start_date=datetime.strptime(
-                                  row['Start Date'], "%m/%d/%y"),
+                                  row['Start Date'], "%m/%d/%y").date(),
                               end_date=datetime.strptime(
-                                  row['End Date'], "%m/%d/%y"),
+                                  row['End Date'], "%m/%d/%y").date(),
                               taker=CourseTaker(name=row['Name'],
                                                 email=row['Email']),
                               box_completion=box_completion,
@@ -52,7 +57,7 @@ def get_courses(sheet: GoogleSheet) -> List[Course]:
                               only_quiz=row['Only Quiz']==1,
                               only_feed=row['Only feedback']==1,
                               final_state=row['FINAL STATE'],
-                              quiz_date=datetime.strptime(row['Quiz sent date'], "%m/%d/%y"),
+                              quiz_date=quiz_date,
                               quiz_result=quiz_result
                               ))
         i = i+1

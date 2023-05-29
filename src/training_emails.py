@@ -1,10 +1,9 @@
 from datetime import datetime
-import json
-from typing import List
 from course import Course, CourseTaker
+from config import CONFIG
+
 from fjutils.email.fj_email import FJEmailSimple
 
-from config import CONFIG
 
 
 def send_course_start_email(course: Course) -> None:
@@ -359,7 +358,7 @@ def send_weekly_report_email(course: Course, df: str) -> None:
     email.send()
 
 
-def send_offline_pre_training_email(course_trainer: str) -> None:
+def send_offline_pre_training_email(course_trainer: CourseTaker) -> None:
     """Auto report """
     taker = course_trainer
     title = "Pre-training email"
@@ -378,7 +377,7 @@ def send_offline_pre_training_email(course_trainer: str) -> None:
     email.send()
 
 
-def send_offline_post_training_email(course_trainer: str) -> None:
+def send_offline_post_training_email(course_trainer: CourseTaker) -> None:
     """Auto report """
     taker = course_trainer
     title = "Pre-training email"

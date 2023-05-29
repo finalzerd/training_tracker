@@ -2,13 +2,12 @@ import time
 from typing import List
 import random
 import json
+import pyautogui
+import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 
 from config import CONFIG
 from course import Course
-
-from fjutils.scraping.selenium_scraper import SeleniumScraper
 
 js_expand_sec = """let dropdownBtns = document.querySelectorAll(
             ".ud-btn.ud-btn-large.ud-btn-link.ud-heading-md.js-panel-toggler.accordion-panel-module--panel-toggler--1RjML"
@@ -21,94 +20,129 @@ js_expand_sec = """let dropdownBtns = document.querySelectorAll(
             }
             });"""
 
-
 class UdemyScraper:
-    """tracker class for main function to use abstractly"""
+    """A web scraper class for training tracker to scrape Udemy courses information"""
 
     def __init__(self) -> None:
-        self.scraper = SeleniumScraper(windows=CONFIG.WINDOWS)
-        self.section_names_to_not_count: List[str] = ["Section 22: APPENDIX: OLDER PYTHON 2 MATERIAL",
-                                                      "Section 23: BONUS SECTION: THANK YOU!",
-                                                      "Section 21: Bonus Material - Introduction to GUIs",
-                                                      "Section 1: Course Overview",
-                                                      "Section 1: Introduction",
-                                                      "Section 1: Welcome to the Complete Microsoft PowerPoint Course",
-                                                      "Section 1: Welcome",
-                                                      "Section 7: BONUS Section: Database Design",
-                                                      "Section 42: Course Wrap Up",
-                                                      "Section 1: Microsoft Excel 101 Course Introduction",
-                                                      "Section 7: Added Material: Putting it all together in a real life example",
-                                                      "Section 8: Appendix: Stochastic & Markov Processes for Jarrow Model"]
-        
-        self.CONFIG = CONFIG
+        self.scraper = uc.Chrome()
         self.current_account_username: str | None = None
+        
+    def _ensure_past_cloudflare(self) -> bool:
+        try:
+            time.sleep(1)
+            self.scraper.set_window_size(1024, 600)
+            self.scraper.maximize_window()
+            time.sleep(1)
+            for i in range(10):
+                checkbox = pyautogui.locateOnScreen("assets/cloudflare_checkbox.png")
+                if checkbox is None:
+                    return True
+                time.sleep(1)
+                pyautogui.moveTo(checkbox)
+                pyautogui.click()
+                time.sleep(random.randint(8, 12))
+            return False
+        except:
+            return False
+    
+    def _ensure_past_press_and_hold(self) -> bool:
+        self.scraper.set_window_size(1024, 600)
+        self.scraper.maximize_window()
+        time.sleep(1)
+        
+        for i in range(10):
+            print(f"start looking for hold {time.time()}")
+            checkbox = pyautogui.locateOnScreen("assets/udemy_press_and_hold.png")
+            if checkbox is None:
+                return True
+            print(f"found hold {time.time()}")
+            pyautogui.moveTo(checkbox)
+            pyautogui.mouseDown()
+            time.sleep(random.randint(15, 16))
+            pyautogui.mouseUp()
+            time.sleep(5)
+            if pyautogui.locateOnScreen("assets/udemy_press_and_hold.png") != None:
+                continue
+            else:
+                return True
+        return False
+    
+    def _login_to_account(self, login: str, password: str) -> bool:
+        if "udemy.com" not in self.scraper.current_url:
+            self.scraper.get("https://www.udemy.com")
+        
+        if self.current_account_username == login:
+            return True
+        
+        # try to use cookies from file first
+        cookies_path = f"cookies/cookies_{login.split('@')[0]}.json"
+        try:
+            cookies: List[dict] = json.load(open(cookies_path, "r"))
+            for cookie in cookies:
+                self.scraper.add_cookie(cookie)
+            self.current_account_username = login
+            self.scraper.refresh()
+            if not self._ensure_past_cloudflare() or not self._ensure_past_press_and_hold():
+                return False
+            return True
+        except:
+            pass # cookies not found
+            
+        # try to login with selenium clicking and typing
+        self.scraper.get("https://www.udemy.com/join/login-popup/")
+        time.sleep(random.randint(3, 4))
+        
+        if not self._ensure_past_cloudflare() or not self._ensure_past_press_and_hold():
+            return False
+        
+        try:
+            time.sleep(random.randint(1, 2))
+            self.scraper.find_element(By.XPATH, "//input[@name='email']").send_keys(login)
+            time.sleep(random.randint(1, 2))
+            self.scraper.find_element(By.XPATH, "//input[@name='password']").send_keys(password)
+            time.sleep(random.randint(1, 2))
+            login_button = pyautogui.locateOnScreen("assets/udemy_login_button.png")
+            if login_button is not None:
+                pyautogui.click(login_button)
+                time.sleep(random.randint(1, 2))
+                
+            time.sleep(random.randint(4, 5))
+            
+            if not self._ensure_past_cloudflare() or not self._ensure_past_press_and_hold():
+                return False
+            
+            cookies = self.scraper.get_cookies()
+            with open(cookies_path, "w") as f:
+                json.dump(cookies, f)
+            return True
+        except:
+            return False
+        
 
-    def _go_to_course_link(self, course: Course, link: str) -> bool:
-        """goes to course link and logs in if necessary"""
-        self.scraper.get("https://www.udemy.com")
-        # cookies_path= "C:\Processes\training_tracker\bin"
-        if course.login == "anoushka.khanna@fischerjordan.com":
-            cookies = json.load(open(r"bin\cookies_anoushka.json", "r"))
-        elif course.login == "engage@fischerjordan.com":
-            cookies = json.load(
-                open(r"bin\cookies_engage.json", "r", newline=''))
-        elif course.login == "rprogramming.fj@gmail.com":
-            cookies = json.load(
-                open(r"bin\cookies_rprogramming.json", "r"))
-        elif course.login == "salikb@yahoo.com":
-            cookies = json.load(open(r"bin\cookies_salikb.json", "r"))
-        elif course.login == "regressionmodeling.fj@gmail.com":
-            cookies = json.load(
-                open(r"bin\cookies_regressionmodelling.json", "r"))
-        elif course.login == "projectmanagement.fj@gmail.com":
-            cookies = json.load(
-                open(r"bin\cookies_projectmanagement.json", "r"))
-        elif course.login == "darshana.shetty@fischerjordan.com":
-            cookies = json.load(open(r"bin\cookies_darshana.json", "r"))
-        else:
-            raise Exception(f"No login cookies for {course.login}")
+    def _go_to_course_link(self, course: Course, course_link: str) -> bool:
+        """goes to specific course link and expands the and logs in if necessary
+
+        Args:
+            course (Course): The course that the link is from
+            course_link (str): The specific link to go to from the course
+
+        Returns:
+            bool: True if successful, False if not
+        """
+        if not self._login_to_account(course.login, course.password):
+            return False
+
+        time.sleep(random.randint(4, 5))
 
         time.sleep(random.randint(7, 8))
-
-        for cookie in cookies:
-            self.scraper.add_cookie(cookie)
-            # time.sleep(random.randint(1,4).5)
-
-        self.scraper.wait(seconds=random.randint(7, 8))
-        # self.get_cookies_func(course.login)
-        self.scraper.execute_script(f"window.location = '{link}'")
+        self.scraper.execute_script(f"window.location = '{course_link}'")
 
         print("starting wait")
         time.sleep(random.randint(30, 40))
         print("ending wait")
         self.scraper.execute_script(js_expand_sec)
-        self.scraper.wait(seconds=random.randint(2, 3))
-        # print(self.scraper.find_elements(By.CLASS_NAME, "curriculum-item-link--progress-toggle--1CMcg ud-toggle-input-container ud-text-sm"))
-        # print(len((self.scraper.find_elements(By.CLASS_NAME, "curriculum-item-link--progress-toggle--1CMcg ud-toggle-input-container ud-text-sm"))))
-
-        if (len(self.scraper.find_elements(By.CLASS_NAME, "curriculum-item-link--progress-toggle--1CMcg.ud-toggle-input-container.ud-text-sm")) == 0):
-            print("loading cookies again")
-            self.scraper.delete_all_cookies()
-            self.scraper.wait(seconds=random.randint(1, 2))
-            self._go_to_course_link(course, link)
-
-        # time.sleep(random.randint(1,3))
-
+        time.sleep(random.randint(2, 3))
         return True
-
-        # self.scraper.get(link)
-        # self.scraper.wait(seconds=2)
-
-        try:
-            not_now_button = self.scraper.find_element(
-                By.CLASS_NAME, "ab-message-button")
-            if not_now_button.text == "Not now":
-                not_now_button.click()
-                self.scraper.wait(seconds=2)
-        except:
-            pass
-
-        # self._expand_sections(close_count_exclusions=False)
 
     def _expand_sections(self, close_count_exclusions: bool):
         """
@@ -125,7 +159,7 @@ class UdemyScraper:
                 By.CLASS_NAME, "panel--expand-icon--1ZzXo")
             for idx, (arrow, header_name) in enumerate(zip(expand_arrows, section_headers)):
                 if close_count_exclusions:
-                    if header_name in self.section_names_to_not_count:
+                    if header_name in CONFIG.SECTION_NAMES_NOT_TO_COUNT:
                         # Close section
                         if not arrow.value_of_css_property("transform") == "none":
                             self.scraper.scroll_to(arrow)
@@ -225,7 +259,7 @@ class UdemyScraper:
             print(len(total_checkboxes))
             print('waiting')
             time.sleep(random.randint(5, 8))
-            self.scraper.wait(seconds=random.randint(10, 12))
+            time.sleep(random.randint(10, 12))
             print('starting again')
 
             checkboxes = self.scraper.find_elements(
@@ -327,32 +361,3 @@ class UdemyScraper:
             self.reset_link()
             print("control back to calling func")
         return True
-
-    def get_cookies_func(self, course) -> None:
-        # driver= selenium.webdriver.Firefox()
-        # self.scraper.get("https://www.udemy.com")
-        cookies = self.scraper.get_cookies()
-        if course == "engage@fischerjordan.com":
-            with open(r"bin\cookies_engage.json", "w") as outfile:
-                json.dump(cookies, outfile)
-        elif course == "anoushka.khanna@fischerjordan.com":
-            with open(r"bin\cookies_anoushka.json", "w") as outfile:
-                json.dump(cookies, outfile)
-        elif course == "rprogramming.fj@gmail.com":
-            with open(r"bin\cookies_rprogramming.json", "w") as outfile:
-                json.dump(cookies, outfile)
-        elif course == "regressionmodeling.fj@gmail.com":
-            with open(r"bin\cookies_regressionmodelling.json", "w")as outfile:
-                json.dump(cookies, outfile)
-        elif course == "projectmanagement.fj@gmail.com":
-            with open(r"bin\cookies_projectmanagement.json", "w")as outfile:
-                json.dump(cookies, outfile)
-        elif course == "salikb@yahoo.com":
-            with open(r"bin\cookies_salikb.json", "w")as outfile:
-                json.dump(cookies, outfile)
-        elif course == "darshana.shetty@fischerjordan.com":
-            with open(r"bin\cookies_darshana.json", "w")as outfile:
-                json.dump(cookies, outfile)
-        else:
-            raise Exception(f"No login cookies for {course.login}")
-        return None

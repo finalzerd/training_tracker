@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 import gspread as gs
 from course import Course
 from typing import List
@@ -7,11 +8,11 @@ import requests
 import pandas as pd
 
 import training_emails
-from config import get_config
+from config import _get_config
 
 from fjutils.sheets.google_sheet import GoogleSheet
 
-CONFIG = get_config("config/config.json")
+CONFIG = _get_config("config/config.json")
 
 mc_questions: List[dict] = GoogleSheet("Offline Training Course Repository", "Sheet4").sheet.get_all_records()
 
@@ -85,17 +86,17 @@ def generate_quiz(self,course:Course, mc_questions: List[dict]) -> str:
 
 def main():
     
-    gc = gs.service_account(filename=r"bin\service_account.json")
+    gc = gs.service_account(filename=Path(r"bin\service_account.json"))
     sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1LgThxBOaICV6Ak8GJ0Kqztx0VBo9khr3372wU_cwhuw/edit#gid=1167738258')
     ws = sh.worksheet('Tracker')
     df = pd.DataFrame(ws.get_all_records())
     print(df.shape)
-    for i in range(df.shape[0]):
+    # for i in range(df.shape[0]):
         
-        if(df.iloc[i,3]-datetime.today().date()==1):
-            training_emails.offline_pretraining()
-        if(datetime.today().date()-df.iloc[i,4]==1):
-            training_emails.offline_posttraining()    
+        # if(datetime.strptime(df.iloc[i,3])-datetime.today().date()==1):
+        #     training_emails.send_offline_pre_training_email(df.iloc[i,1],df.iloc[i,2])
+        # if(datetime.today().date()-df.iloc[i,4]==1):
+        #     training_emails.send_offline_post_training_email(df.iloc[i,1],df.iloc[i,2])
             
             
 if __name__ == "__main__":
