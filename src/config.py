@@ -57,7 +57,7 @@ if args.test:
     try:
         CONFIG = _get_config("config/test_config.json")
     except Exception as e:
-        raise Exception("Could not find a config/test_config.json")
+        raise Exception("Please create a config/test_config.json file with the same structure as config/config.json to run with the test config")
         
 else:
     CONFIG = _get_config("config/config.json")
