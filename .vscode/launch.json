@@ -13,6 +13,16 @@
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}",
       "justMyCode": true
+    },
+    {
+      "name": "auto reports test",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/auto_reports.py",
+      "args": ["--test"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "justMyCode": true
     }
   ]
 }

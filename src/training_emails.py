@@ -4,20 +4,26 @@ from config import CONFIG
 
 from fjutils.email.fj_email import FJEmailSimple
 
-
+def send_training_email(email:FJEmailSimple) -> None:
+    """Sends an email to the taker of a course taking into account testing configurations."""
+    if CONFIG.SEND_LIVE_EMAILS:
+        email.send()
+    else:
+        print(f"\n=== TESTING email sent ==========================")
+        print(f"TO: {email.to}")
+        print(f"CC: {email.cc}")
+        print(f"BCC: {email.bcc}")
+        print(f"SUBJECT: {email.subject}")
+        print(f"TITLE: {email.title}")
+        print(f"TEXT: {email.text}")
+        print(f"==================================================\n")
 
 def send_course_start_email(course: Course) -> None:
     """To be sent to the taker a day before the course starts."""
     taker: CourseTaker = course.taker
     word_course: str = "course" if len(course.links) == 1 else "courses"
 
-    # make sure the wording of "tomorrow" makes sense
-    # assert (datetime.today().date() == course.start_date.date()), "Wording is for only on start date"
-
     title: str = "FJ Training Course Start"
-
-    start_date_str: str = "today" if datetime.today().date(
-    ) == course.start_date else course.start_date.strftime("%m/%d/%y")
 
     email_text = f"""Hi {taker.first_name()},<br><br>
                         Welcome to the {course.name} {word_course}!<br><br>
@@ -39,7 +45,7 @@ def send_course_start_email(course: Course) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_course_start_email_rescheduled(course: Course) -> None:
@@ -47,13 +53,7 @@ def send_course_start_email_rescheduled(course: Course) -> None:
     taker: CourseTaker = course.taker
     word_course: str = "course" if len(course.links) == 1 else "courses"
 
-    # make sure the wording of "tomorrow" makes sense
-    # assert (datetime.today().date() == course.start_date.date()), "Wording is for only on start date"
-
     title: str = "FJ Training Rescheduled Course Start"
-
-    start_date_str: str = "today" if datetime.today().date(
-    ) == course.start_date else course.start_date.strftime("%m/%d/%y")
 
     email_text = f"""Hi {taker.first_name()},<br><br>
                         Welcome to the {course.name} {word_course}!<br><br>
@@ -75,7 +75,7 @@ def send_course_start_email_rescheduled(course: Course) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_training_reminder_email(course: Course) -> None:
@@ -97,7 +97,7 @@ def send_training_reminder_email(course: Course) -> None:
                           subject="FJ Training Course Reminder",
                           title="FJ Training Course Reminder",
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_unfinished_by_deadline_email(course: Course) -> None:
@@ -116,7 +116,7 @@ def send_unfinished_by_deadline_email(course: Course) -> None:
                           subject="FJ Training Course - Action Required",
                           title="FJ Training Course - Action Required",
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_reschedule_reminder_email(course: Course) -> None:
@@ -138,7 +138,7 @@ def send_reschedule_reminder_email(course: Course) -> None:
                           subject="FJ Training Course - Action Required",
                           title="FJ Training Course - Action Required",
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_completion_email(course: Course) -> None:
@@ -160,7 +160,7 @@ def send_completion_email(course: Course) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_completion_email_with_quiz(course: Course, quiz_url: str) -> None:
@@ -187,7 +187,7 @@ def send_completion_email_with_quiz(course: Course, quiz_url: str) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_feedback_request_email(course: Course) -> None:
@@ -208,15 +208,15 @@ def send_feedback_request_email(course: Course) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_error_email(course: Course, error: Exception) -> None:
-    course.box_completion = -1
+    course.box_completion = -1 # to prevent error on sending email
     email = FJEmailSimple(to=CONFIG.CODE_ADMIN_EMAILS,
                           subject="Training Tracker Error",
                           text=f"Error->{str(error)}<br><br>{course}")
-    email.send()
+    send_training_email(email)
 
 
 def only_quiz_email(course: Course) -> None:
@@ -237,7 +237,7 @@ def only_quiz_email(course: Course) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_quiz_request_email(course: Course) -> None:
@@ -258,7 +258,7 @@ def send_quiz_request_email(course: Course) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_failed_quiz_email(course: Course) -> None:
@@ -277,7 +277,7 @@ def send_failed_quiz_email(course: Course) -> None:
                           subject="FJ Training Course - Action Required",
                           title="FJ Training Course - Action Required",
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_failed_quiz_twice_email(course: Course) -> None:
@@ -296,7 +296,7 @@ def send_failed_quiz_twice_email(course: Course) -> None:
                           subject="FJ Training Course - Action Required",
                           title="FJ Training Course - Action Required",
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_completion_after_quiz_email(course: Course) -> None:
@@ -316,14 +316,13 @@ def send_completion_after_quiz_email(course: Course) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_cannot_track_email(course: Course, sheet_row) -> None:
     """Flagging the admin if cannot track """
     taker = course.taker
     title = "Cannot track progress"
-    word_course = "course" if len(course.links) == 1 else "courses"
 
     email_text = f"""The bot is unable to track progress for {taker} course on {course.name} at row number {sheet_row}. Please keep a check on the course manually<br><br>
                     """
@@ -333,10 +332,10 @@ def send_cannot_track_email(course: Course, sheet_row) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
-def send_weekly_report_email(course: Course, df: str) -> None:
+def send_weekly_report_email(course: Course, df_html: str) -> None:
     """Auto report """
     taker = course.taker
     title = "Weekly Report"
@@ -345,7 +344,7 @@ def send_weekly_report_email(course: Course, df: str) -> None:
                     Please find below the results of your online courses to date:<br><br>
                     
                     Note that items in red require further action: <br><br>
-                    {df}<br><br>
+                    {df_html}<br><br>
                     FJ Training
                     """
 
@@ -355,11 +354,11 @@ def send_weekly_report_email(course: Course, df: str) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_offline_pre_training_email(course_trainer: CourseTaker) -> None:
-    """Auto report """
+    """Offline pre training email """
     taker = course_trainer
     title = "Pre-training email"
 
@@ -374,14 +373,13 @@ def send_offline_pre_training_email(course_trainer: CourseTaker) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)
 
 
 def send_offline_post_training_email(course_trainer: CourseTaker) -> None:
-    """Auto report """
+    """Offline post training email"""
     taker = course_trainer
     title = "Pre-training email"
-    # word_course = "course" if len(course.links) == 1 else "courses"
 
     email_text = f"""Hi {taker.first_name()},<br><br>
                     Please fill the Post-training scores for the course <br><br>
@@ -394,4 +392,4 @@ def send_offline_post_training_email(course_trainer: CourseTaker) -> None:
                           subject=title,
                           title=title,
                           text=email_text)
-    email.send()
+    send_training_email(email)

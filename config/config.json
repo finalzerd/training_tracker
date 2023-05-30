@@ -12,13 +12,14 @@
     "tracker_worksheet_name": "Tracker",
     "mc_questions_sheet_name": "Online Training Course Repository",
     "mc_questions_worksheet_name": "Quiz Question-MCQ",
+    "report_card_tracker_worksheet_name": "reportcardtracker",
     "admin_emails": [
         "darshana.shetty@fischerjordan.com",
         "anoushka.khanna@fischerjordan.com"
     ],
     "main_admin_email": "darshana.shetty@fischerjordan.com",
     "windows": true,
-    "test": false,
+    "send_live_emails": true,
     "section_names_not_to_count": [
         "Section 22: APPENDIX: OLDER PYTHON 2 MATERIAL",
         "Section 23: BONUS SECTION: THANK YOU!",
