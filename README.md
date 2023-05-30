@@ -1,8 +1,8 @@
 # FJ Training Tracker
 
-This repo is used to  to track the progress of applicants' udemy and youtube courses on a google sheet and reset the courses as needed.
+This repo is used to track the progress of FJ courses on a google sheet and reset the courses as needed.
 
-# Setup Instructions
+# Setup
 ```
 git clone <repo-link>
 cd training_tracker
@@ -13,19 +13,25 @@ source .venv/bin/activate # for linux
 pip install -r requirements.txt
 ```
 
-# Runnable Scripts
-Running with the --test flag will use the test config file instead of the default config file this is useful for testing the scripts without affecting the actual google sheet
+# Execution
+To run these scripts in test mode, use the --test or -t flag. This will use the test config in 'config/test_config.json' instead of the default config in 'config/config.json' which can be setup to use different test sheets and turn off live emails etc.
+## Daily Tracker
+This script is used to track the progress of the applicants on online courses. Main functionality is to:
+* Check the udemy and youtube courses and update the google sheet to reflect progress
+* Reset the course on udemy if the applicant has completed the course
+* Send a emails to applicants on course start, reminder, completion, and quiz
+
 ```
 python src/daily_tracker.py [-h] [--test TEST]
 ```
-this is the main script that will be used to track the progress of the applicants. It will check the udemy and youtube courses and update the google sheet accordingly. It will also reset the courses if needed.
-
+## Offline Tracker
+TODO: fill in
 ```
 python src/offline_tracker.py [-h] [--test TEST]
 ```
-TODO: fill in
+## Auto Reports
+This script is meant to be run weekly to generate the weekly course reports for the applicants. It will send a email with a dataframe in html to each applicant with the courses they are registered for on the google sheets.
 ```
 python src/auto_reports.py [-h] [--test TEST]
 ```
-TODO: fill in
 
