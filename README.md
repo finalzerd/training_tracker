@@ -14,7 +14,11 @@ pip install -r requirements.txt
 ```
 
 # Execution
-To run these scripts in test mode, use the --test or -t flag. This will use the test config in 'config/test_config.json' instead of the default config in 'config/config.json' which can be setup to use different test sheets and turn off live emails etc.
+options:
+  -h, --help            show this help message and exit
+  --test, -t            to run with the test config in config/test_config.json
+  --date DATE, -d DATE  to run with a specific date, must be in YYYY-MM-DD format
+  --row ROW, -r ROW     run a specific row from the tracker sheet
 ## Daily Tracker
 This script is used to track the progress of the applicants on online courses. Main functionality is to:
 * Check the udemy and youtube courses and update the google sheet to reflect progress
@@ -22,16 +26,16 @@ This script is used to track the progress of the applicants on online courses. M
 * Send a emails to applicants on course start, reminder, completion, and quiz
 
 ```
-python src/daily_tracker.py [-h] [--test TEST]
+python src/daily_tracker.py [-h] [--test] [--date DATE] [--row ROW]
 ```
 ## Offline Tracker
 TODO: fill in
 ```
-python src/offline_tracker.py [-h] [--test TEST]
+python src/offline_tracker.py [-h] [--test] [--date DATE] [--row ROW]
 ```
 ## Auto Reports
 This script is meant to be run weekly to generate the weekly course reports for the applicants. It will send a email with a dataframe in html to each applicant with the courses they are registered for on the google sheets.
 ```
-python src/auto_reports.py [-h] [--test TEST]
+python src/auto_reports.py [-h] [--test] [--date DATE] [--row ROW]
 ```
 
