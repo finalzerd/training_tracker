@@ -101,9 +101,14 @@ class UdemyScraper:
             time.sleep(random.randint(1, 2))
             self.scraper.find_element(By.XPATH, "//input[@name='password']").send_keys(password)
             time.sleep(random.randint(1, 2))
-            login_button = pyautogui.locateOnScreen("assets/udemy_login_button.png")
-            if login_button is not None:
-                pyautogui.click(login_button)
+            
+            if "https://www.udemy.com/join/login-popup/" in self.scraper.current_url:
+                time.sleep(random.randint(1, 2))
+                pyautogui.hotkey("ctrl", "f")
+                time.sleep(random.randint(1, 2))
+                pyautogui.typewrite("log in")
+                time.sleep(random.randint(1, 2))
+                pyautogui.hotkey("ctrl", "enter")
                 time.sleep(random.randint(1, 2))
                 
             time.sleep(random.randint(4, 5))
@@ -292,7 +297,7 @@ class UdemyScraper:
             return True
         return False
 
-    def reset_link(self):
+    def _reset_link(self):
         # """Works if course link is opened. Resets at start to what is needed"""
 
         js_reset_course = """
@@ -333,19 +338,11 @@ class UdemyScraper:
         #             print(2)
         #             exercise.click()
 
-        #             # Click the reset code button
         #             time.sleep(random.randint(1,4))
         #             all_buttons = self.scraper.find_elements(By.CLASS_NAME, "udlite-btn-ghost")
-        #             for button in all_buttons:
-        #                 if button.text == "Reset code":
-        #                     button.click()
         #                     time.sleep(random.randint(1,4))
         #                     break
-        #             # Click the yes reset button
         #             all_buttons = self.scraper.find_elements(By.CLASS_NAME, "udlite-btn-primary")
-        #             for button in all_buttons:
-        #                 if button.text == "Yes, reset":
-        #                     button.click()
         #                     time.sleep(random.randint(1,4))
         #                     break
         #     except:
@@ -358,6 +355,6 @@ class UdemyScraper:
         if (self._go_to_course_link(course, course.links[0])):
             time.sleep(5.0)
             print("calling reset link")
-            self.reset_link()
+            self._reset_link()
             print("control back to calling func")
         return True

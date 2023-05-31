@@ -37,6 +37,10 @@ def main():
     course: Course
     for i, course in enumerate(courses):
         sheet_row = i + 2
+        
+        if CONFIG.SHEET_ROW is not None and sheet_row != CONFIG.SHEET_ROW:
+            continue
+        
         print(
             f"sheet_row: {sheet_row}, end_date: {course.end_date}, login: {course.login}")
 
@@ -50,11 +54,11 @@ def main():
         if is_youtube_course:   
 
             # Youtube start email
-            if ((datetime.today() + timedelta(days=CONFIG.START_EMAIL_DAYS_BEFORE)).date() == course.start_date):
+            if ((CONFIG.DATETIME_TODAY + timedelta(days=CONFIG.START_EMAIL_DAYS_BEFORE)).date() == course.start_date):
                 training_emails.send_course_start_email(course)
 
             # Youtube Completion email
-            if (course.end_date + timedelta(days=CONFIG.ALERT_AFTER_DEADLINE_DAYS)) == date.today():
+            if (course.end_date + timedelta(days=CONFIG.ALERT_AFTER_DEADLINE_DAYS)) == CONFIG.DATE_TODAY:
                 quiz_url = quiz.generate_quiz(
                     tracker_sheet, course, mc_questions)
                 if quiz_url is None:
@@ -74,14 +78,14 @@ def main():
             # Youtube subsequent week feedback reminder
             start_feedback_reminders_date: date = (
                 course.end_date + timedelta(CONFIG.ALERT_AFTER_DEADLINE_DAYS))
-            if (start_feedback_reminders_date < date.today()
-                and (date.today() - start_feedback_reminders_date) % timedelta(7) == timedelta(0)
+            if (start_feedback_reminders_date < CONFIG.DATE_TODAY
+                and (CONFIG.DATE_TODAY - start_feedback_reminders_date) % timedelta(7) == timedelta(0)
                     and not course.feedback_provided):
 
                 training_emails.send_feedback_request_email(course)
 
             need_quiz = course.end_date > datetime(2022, 7, 9).date()
-            weeks = (date.today() - course.end_date).days
+            weeks = (CONFIG.DATE_TODAY - course.end_date).days
 
             if need_quiz and weeks in [7, 14] and course.quiz1 == 'QNT':
                 if len(course.quiz_url) == 0:
@@ -125,14 +129,14 @@ def main():
 
         # If course was rescheduled, then don't send emails.
         if course.was_rescheduled:
-            if (course.end_date + timedelta(days=CONFIG.ALERT_AFTER_DEADLINE_DAYS)) == date.today():
+            if (course.end_date + timedelta(days=CONFIG.ALERT_AFTER_DEADLINE_DAYS)) == CONFIG.DATE_TODAY:
                 udemy_scraper.update_course_completion(course, courses)
                 training_sheet.log_completion(
                     tracker_sheet, sheet_row, course)
             continue  # Do this regardless
 
         # Send a welcome greeting email on the day before the start date with credentials and reset course.
-        if ((datetime.today() + timedelta(days=CONFIG.START_EMAIL_DAYS_BEFORE)).date() == course.start_date):
+        if ((CONFIG.DATETIME_TODAY + timedelta(days=CONFIG.START_EMAIL_DAYS_BEFORE)).date() == course.start_date):
             print("new course")
             if (course.is_reschedule):
                 print("rescheduled course")
@@ -161,8 +165,8 @@ def main():
                 continue
 
         # Send reminder email before due date pre notice
-        if ((datetime.today() + timedelta(days=CONFIG.REMINDER_DAYS_ADVANCE)).date() == course.end_date
-                and not datetime.today().date() == course.start_date):
+        if ((CONFIG.DATETIME_TODAY + timedelta(days=CONFIG.REMINDER_DAYS_ADVANCE)).date() == course.end_date
+                and not CONFIG.DATE_TODAY == course.start_date):
             try:
                 udemy_scraper.update_course_completion(course, courses)
                 time.sleep(3)
@@ -183,7 +187,7 @@ def main():
                 training_emails.send_cannot_track_email(course, sheet_row)
 
         # On end date check everything and either warning or congratulations.
-        if (course.end_date + timedelta(days=CONFIG.ALERT_AFTER_DEADLINE_DAYS)) == date.today():
+        if (course.end_date + timedelta(days=CONFIG.ALERT_AFTER_DEADLINE_DAYS)) == CONFIG.DATE_TODAY:
             # tracker.scraper.delete_all_cookies()
             if (course.is_reschedule):
                 try:
@@ -258,7 +262,7 @@ def main():
                     training_emails.send_error_email(course, e)
 
         # If subsequent week after and never did a reschedule then send another reschedule email
-        if (course.end_date < date.today() and (date.today() - course.end_date) % timedelta(7) == timedelta(0)):
+        if (course.end_date < CONFIG.DATE_TODAY and (CONFIG.DATE_TODAY - course.end_date) % timedelta(7) == timedelta(0)):
             try:
                 if course.needs_reschedule:
                     training_emails.send_reschedule_reminder_email(course)
@@ -269,7 +273,7 @@ def main():
         # Send feedback request reminder if still haven't  finished  survey and it is a subsequent weeks one day after
         start_feedback_reminders_date: date = (
             course.end_date + timedelta(CONFIG.ALERT_AFTER_DEADLINE_DAYS))
-        if (start_feedback_reminders_date < date.today() and (date.today() - start_feedback_reminders_date) % timedelta(7) == timedelta(0)):
+        if (start_feedback_reminders_date < CONFIG.DATE_TODAY and (CONFIG.DATE_TODAY - start_feedback_reminders_date) % timedelta(7) == timedelta(0)):
             try:
                 if not course.feedback_provided:
                     # make sure box completion is not null otherwise check if its below what it should be
@@ -285,7 +289,7 @@ def main():
 
         # Conditions for quiz pass or fail
         need_quiz = course.end_date > datetime(2022, 7, 9).date()
-        weeks = (date.today() - course.end_date).days
+        weeks = (CONFIG.DATE_TODAY - course.end_date).days
 
         if need_quiz and weeks in [7, 14] and course.quiz1 == 'QNT':
             if len(course.quiz_url) == 0:
@@ -344,7 +348,7 @@ def main():
         if course.links[0] == "" or course.login == "":
             continue
         try:
-            if ((datetime.today() + timedelta(days=CONFIG.START_EMAIL_DAYS_BEFORE)).date() == course.start_date):
+            if ((CONFIG.DATETIME_TODAY + timedelta(days=CONFIG.START_EMAIL_DAYS_BEFORE)).date() == course.start_date):
                 if (reset_course_new(course.links[0], course.login) == 1):
                     print("course reset successfully")
         except:

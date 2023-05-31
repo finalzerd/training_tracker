@@ -5,8 +5,7 @@
     "course_complete_percentage": 0.9,
     "course_reminder_percentage": 0.5,
     "code_admin_emails": [
-        "noah.provenzano@fischerjordan.com",
-        "muskan.laul@fischerjordan.com"
+        "noah.provenzano@fischerjordan.com"
     ],
     "tracker_sheet_name": "Online Training Course Repository",
     "tracker_worksheet_name": "Tracker",

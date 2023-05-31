@@ -9,7 +9,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/src/daily_tracker.py",
-      "args": ["--test"],
+      "args": ["--row", "20"],
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}",
       "justMyCode": true

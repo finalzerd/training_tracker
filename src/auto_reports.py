@@ -74,7 +74,7 @@ def main():
                 df.loc[len(df), ] = [course_temp[j].name,course_temp[j].end_date, course_temp[j].final_state,course_temp[j].quiz_result]
             
             df['End Date'] = pd.to_datetime(df['End Date']).apply(lambda x: x.date())  
-            df=df[df['End Date']<datetime.today().date()]
+            df=df[df['End Date'] < CONFIG.DATE_TODAY]
             df=df.sort_values('End Date')                         
             
             training_emails.send_weekly_report_email(course_temp[0],df.to_html(index=False,justify='center',border=2,formatters={"Present State":format_column_c},escape=False))

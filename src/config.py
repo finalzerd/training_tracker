@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import date, datetime
 import json
 from typing import List
 import argparse
@@ -21,6 +22,10 @@ class TrainingConfig:
     WINDOWS: bool
     SEND_LIVE_EMAILS: bool
     SECTION_NAMES_NOT_TO_COUNT: List[str]
+    DATE_TODAY: date = date.today()
+    DATETIME_TODAY: datetime = datetime.today()
+    SHEET_ROW: int|None = None
+    
 
 
 def _get_config(config_json_path: str) -> TrainingConfig:
@@ -51,7 +56,9 @@ parser = argparse.ArgumentParser(
     description="A program to track training progress for FischerJordan",
     epilog="Developed by: FischerJordan",
 )
-parser.add_argument('--test', '-t', help="to run with the test config in config/test_config.json", action="store_true")
+parser.add_argument('--test', '-t', help="to run with the test config in config/test_config.json", action="store_true", required=False)
+parser.add_argument('--date', '-d', help="to run with a specific date, must be in YYYY-MM-DD format", type=str, required=False)
+parser.add_argument('--row', '-r', help="run a specific row from the tracker sheet", type=int, required=False)
 
 args = parser.parse_args()
 if args.test:
@@ -59,8 +66,19 @@ if args.test:
         CONFIG = _get_config("config/test_config.json")
     except Exception as e:
         raise Exception("Please create a config/test_config.json file with the same structure as config/config.json to run with the test config")
-        
 else:
     CONFIG = _get_config("config/config.json")
+    
+if args.date is not None:
+    CONFIG.DATE_TODAY = date.fromisoformat(args.date)
+    CONFIG.DATETIME_TODAY = datetime.fromisoformat(args.date)
+    assert type(CONFIG.DATE_TODAY) == date, "Date must be in YYYY-MM-DD format"
+    assert type(CONFIG.DATETIME_TODAY) == datetime, "Date must be in YYYY-MM-DD format"
+
+if args.row is not None:
+    CONFIG.SHEET_ROW = int(args.row)
+    assert type(CONFIG.SHEET_ROW) == int, "Row must be an integer"
+else:
+    CONFIG.SHEET_ROW = None
 
 assert CONFIG is not None, "CONFIG must be exported from config.py"

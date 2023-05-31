@@ -81,7 +81,7 @@ def send_course_start_email_rescheduled(course: Course) -> None:
 def send_training_reminder_email(course: Course) -> None:
     taker: CourseTaker = course.taker
     days_remaining: int = (course.end_date -
-                           datetime.today().date()).days
+                           CONFIG.DATE_TODAY).days
     word_course: str = "course" if len(course.links) == 1 else "courses"
     end_date: str = course.end_date.strftime("%m/%d/%y")
 
