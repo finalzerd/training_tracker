@@ -1,9 +1,12 @@
 .tmp.driveupload/
-**/*.log
 
+**/*.log
 **/.venv/
 **/venv/
 **/__pycache__/
+**/*.pyc
+**/.vscode/
+
 
 bin/
 
