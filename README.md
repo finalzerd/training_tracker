@@ -1,6 +1,6 @@
 # FJ Training Tracker
 
-This repo is used to track the progress of FJ courses on a google sheet and reset the courses as needed.
+This repo is used to periodically update the google sheets that track FJ trainees progress on udemy and youtube courses.
 
 # Setup
 ```
@@ -12,6 +12,8 @@ source .venv/bin/activate # for linux
 .venv\Scripts\Activate.ps1 # for windows
 pip install -r requirements.txt
 ```
+Create a `.env` file following the same structure as `.env.example` and fill in the values.
+
 
 # Execution
 options:

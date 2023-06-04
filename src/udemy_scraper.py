@@ -1,3 +1,4 @@
+import os
 import time
 from typing import List
 import random
@@ -5,6 +6,9 @@ import json
 import pyautogui
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
+
+from dotenv import load_dotenv
+load_dotenv()
 
 from config import CONFIG
 from course import Course
@@ -24,7 +28,10 @@ class UdemyScraper:
     """A web scraper class for training tracker to scrape Udemy courses information"""
 
     def __init__(self) -> None:
-        self.scraper = uc.Chrome()
+        self.scraper = uc.Chrome(
+            browser_executable_path=os.environ.get("CHROME_PATH"),
+            driver_executable_path=os.environ.get("CHROMEDRIVER_PATH"),
+        )
         self.current_account_username: str | None = None
         
     def _ensure_past_cloudflare(self) -> bool:

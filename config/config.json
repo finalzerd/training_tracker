@@ -17,7 +17,6 @@
         "anoushka.khanna@fischerjordan.com"
     ],
     "main_admin_email": "darshana.shetty@fischerjordan.com",
-    "windows": true,
     "send_live_emails": true,
     "section_names_not_to_count": [
         "Section 22: APPENDIX: OLDER PYTHON 2 MATERIAL",

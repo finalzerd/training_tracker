@@ -19,7 +19,6 @@ class TrainingConfig:
     REPORT_CARD_TRACKER_WORKSHEET_NAME: str
     ADMIN_EMAILS: List[str]
     MAIN_ADMIN_EMAIL: str
-    WINDOWS: bool
     SEND_LIVE_EMAILS: bool
     SECTION_NAMES_NOT_TO_COUNT: List[str]
     DATE_TODAY: date = date.today()
@@ -30,7 +29,7 @@ class TrainingConfig:
 
 def _get_config(config_json_path: str) -> TrainingConfig:
     CONFIG = TrainingConfig(0, 0, 0, 0.0, 0.0, [], "",
-                            "", "", "", "", [], "", True, True, [])
+                            "", "", "", "", [], "", True, [])
     with open(config_json_path, 'r') as f:
         config = json.load(f)
         CONFIG.REMINDER_DAYS_ADVANCE = config["reminder_days_advance"]
@@ -46,7 +45,6 @@ def _get_config(config_json_path: str) -> TrainingConfig:
         CONFIG.REPORT_CARD_TRACKER_WORKSHEET_NAME = config["report_card_tracker_worksheet_name"]
         CONFIG.ADMIN_EMAILS = config["admin_emails"]
         CONFIG.MAIN_ADMIN_EMAIL = config["main_admin_email"]
-        CONFIG.WINDOWS = config["windows"]
         CONFIG.SEND_LIVE_EMAILS = config["send_live_emails"]
         CONFIG.SECTION_NAMES_NOT_TO_COUNT = config["section_names_not_to_count"]
     return CONFIG
