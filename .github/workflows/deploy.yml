@@ -17,11 +17,11 @@ jobs:
           name: "deploy-key"
       
       - name: list files in runner
-        run: ls -a ~/runner/.ssh
+        run: ls -a ~/.ssh
       
       - name: Deploy code to Server
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_USER: ${{ secrets.SSH_USER }}
-        run: ssh -p $SSH_PORT $SSH_USER@$SSH_HOST -i ~/runner/.ssh/deploy-key 'cd C:\Users\eeshi\Documents\training_tracker && git reset --hard origin/main && git checkout main && git fetch && git pull && git checkout main'
+        run: ssh -p $SSH_PORT $SSH_USER@$SSH_HOST -i ~/.ssh/deploy-key 'cd C:\Users\eeshi\Documents\training_tracker && git reset --hard origin/main && git checkout main && git fetch && git pull && git checkout main'
